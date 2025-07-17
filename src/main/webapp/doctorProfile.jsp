@@ -1,5 +1,7 @@
 <%@ page import="entities.Doctor" %>
 <%@ page import="dao.Display" %>
+<%@ page import="entities.ProfilePics" %>
+<%@ page import="java.io.OutputStream" %>
 <%--
   Created by IntelliJ IDEA.
   User: ashug
@@ -29,6 +31,7 @@
 
   Display display = new Display();
   Doctor doc = null;
+
   if(d_id == null)
   {
     response.sendRedirect("docHome.jsp");
@@ -44,6 +47,7 @@
     }
   }
 %>
+
 <!-- Navbar -->
 <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm fixed-top">
   <div class="container">
@@ -174,7 +178,7 @@
 
       <div class="modal-body text-center">
         <!-- Rounded Profile Image -->
-        <img id="profilePreview" class="rounded-circle mb-3 shadow" src="images/img.png" alt="Doctor Profile" style="width: 300px; height: 300px; object-fit: cover;" />
+        <img id="profilePreview" class="rounded-circle mb-3 shadow" src="ProfilePicChecker?user_id=<%=d_id%>" alt="Doctor Profile" style="width: 300px; height: 300px; object-fit: cover;" />
         <!-- Upload Form -->
           <div class="d-flex justify-content-center gap-2 mt-3">
             <form id="uploadForm" action="UpdateProfilePhotoChecker" method="post" enctype="multipart/form-data">
@@ -198,7 +202,8 @@
   <div class="profile-container">
     <!-- Left Section -->
     <div class="profile-left">
-      <img class="profile-image" data-bs-toggle="modal" data-bs-target="#updatePhotoModal" src="images/img.png" alt="Doctor Profile" />
+      <img class="profile-image" data-bs-toggle="modal" data-bs-target="#updatePhotoModal"
+           src="ProfilePicChecker?user_id=<%=d_id%>" alt="Doctor Profile" />
 
       <h4>Dr. <%=doc.getFname()+" "+doc.getLname()%></h4><%
       if(doc.getVerified().equalsIgnoreCase("verified"))
@@ -266,7 +271,10 @@
           Delete Profile
         </button>
       </div>
-
+      <form id="myForm" action="ProfilePicChecker" method="post">
+        <input type="hidden" name="user_id" value="<%=d_id%>">
+        <input type="submit" value="Submit">
+      </form>
     </div>
   </div>
 </section>
@@ -308,10 +316,16 @@
 <script src="js/script.js"/>
 <script>
   setTimeout(function() {
+    document.getElementById("myForm").submit();
     location.reload();
+
   }, 2000); // Refresh after 5 seconds
 
   document.getElementById('uploadForm').submit();
+
+  window.onload = function () {
+    document.getElementById("myForm").submit();
+  };
 
 </script>
 </body>

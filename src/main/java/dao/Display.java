@@ -4,6 +4,7 @@ import db.DbProvider;
 import entities.Appointment;
 import entities.Doctor;
 import entities.Patient;
+import entities.ProfilePics;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
