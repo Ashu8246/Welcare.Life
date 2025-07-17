@@ -26,6 +26,7 @@ public class ProfilePicChecker extends HttpServlet
         Session session = DbProvider.getSession();
         try {
             ProfilePics pic = session.find(ProfilePics.class, userId);
+            session.refresh(pic);
             if (pic != null && pic.getProfilePic() != null) {
                 resp.setContentType("image/jpeg");
                 OutputStream out = resp.getOutputStream();

@@ -271,10 +271,6 @@
           Delete Profile
         </button>
       </div>
-      <form id="myForm" action="ProfilePicChecker" method="post">
-        <input type="hidden" name="user_id" value="<%=d_id%>">
-        <input type="submit" value="Submit">
-      </form>
     </div>
   </div>
 </section>
