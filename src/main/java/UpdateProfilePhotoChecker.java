@@ -23,6 +23,7 @@ public class UpdateProfilePhotoChecker extends HttpServlet
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
     {
+        String referer = req.getHeader("Referer");
         String user_id = req.getParameter("user_id");
         Part profilepic = req.getPart("image");
 
@@ -42,10 +43,10 @@ public class UpdateProfilePhotoChecker extends HttpServlet
 
                 if (!update)
                 {
-                    resp.sendRedirect("doctorProfile.jsp");
+                    resp.sendRedirect(referer);
                 }
                 else {
-                    resp.sendRedirect("doctorProfile.jsp");
+                    resp.sendRedirect(referer);
                 }
             }
             catch (Exception e)
@@ -55,7 +56,7 @@ public class UpdateProfilePhotoChecker extends HttpServlet
         }
         else
         {
-            resp.sendRedirect("doctorProfile.jsp");
+            resp.sendRedirect(referer);
         }
     }
 }

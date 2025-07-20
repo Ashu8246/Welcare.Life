@@ -156,7 +156,7 @@
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="profile-card text-center p-4">
-                    <img src="images/img.png" alt="Patient Photo" class="profile-img">
+                    <img src="ProfilePicChecker?user_id=<%=patient.getPid()%>" alt="Patient Photo" class="profile-img">
                     <h4 class="mt-3">Patient Name: <span id="patient-name"><%=patient.getFname() +" "+ patient.getLname()%></span></h4>
                     <p>Patient ID: <span id="patient-id"><%=pid%></span></p>
                     <p>Date of Birth: <span id="patient-age"><%=patient.getDob()%></span></p>

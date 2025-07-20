@@ -68,6 +68,7 @@ public class UpdateDoctorAuthenticator
                 query.setParameter("city", doctor.getCity());
                 query.setParameter("address", doctor.getAddress());
                 i = query.executeUpdate();
+                tx.commit();
 
                 if (i > 0)
                 {

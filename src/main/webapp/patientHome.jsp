@@ -69,7 +69,7 @@
           <a class="nav-link active" href="index.jsp">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Profile</a>
+          <a class="nav-link" href="patientProfile.jsp" onclick="submitProfileForm()">Profile</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#about">About</a>
@@ -314,6 +314,10 @@
   setTimeout(function() {
     location.reload();
   }, 20000); // Refresh after 5 seconds
+
+  function submitProfileForm() {
+    document.getElementById('profileForm').submit();
+  }
 </script>
 </body>
 </html>
