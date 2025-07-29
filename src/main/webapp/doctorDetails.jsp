@@ -148,7 +148,7 @@
   <div class="profile-container">
     <!-- Left Section -->
     <div class="profile-left">
-      <img class="profile-image" src="images/img.png" alt="Doctor Profile" />
+      <img class="profile-image" src="ProfilePicChecker?user_id=<%=d_id%>" alt="Doctor Profile" />
       <h4>Dr. ExampleABC</h4><%
       if(doc.getVerified().equalsIgnoreCase("verified"))
       {

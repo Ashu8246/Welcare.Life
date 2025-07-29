@@ -1,7 +1,6 @@
 
 .info-box {
     min-width: 30vh;
-    max-height: 30vh;
     border: 1px solid #65abff;
     border-radius: 16px;
     padding: 30px;
@@ -27,6 +26,7 @@
 
 .info-box table{
     border-radius: 10px;
+    max-height: 20vh;
 }
 
 .emergency-btn {

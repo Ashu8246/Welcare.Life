@@ -244,7 +244,7 @@
     <!-- Left Section -->
     <div class="profile-left">
       <img style="width: 300px;height: 300px;" class="profile-image" data-bs-toggle="modal" data-bs-target="#updatePhotoModal"
-           src="ProfilePicChecker?user_id=<%=pid%>" alt="Doctor Profile" />
+           src="ProfilePicChecker?user_id=<%=pid%>" alt="Doctor" />
       <h4><%=patient.getFname()+" "+patient.getLname()%></h4>
       <p style="padding :2vh;">Your health is your greatest wealth. We're here to support your journey with care, compassion, and commitment—every step of the way.</p>
     </div>
@@ -347,7 +347,6 @@
 <script src="js/script.js"/>
 <script>
   setTimeout(function() {
-    document.getElementById("myForm").submit();
     location.reload();
 
   }, 2000); // Refresh after 5 seconds

@@ -1,10 +1,9 @@
 <%@ page import="dao.Display" %>
-<%@ page import="entities.Doctor" %>
-<%@ page import="entities.Patient" %><%--
+<%@ page import="entities.Doctor" %><%--
   Created by IntelliJ IDEA.
   User: ashug
-  Date: 18-06-2025
-  Time: 02:25 am
+  Date: 19-06-2025
+  Time: 06:53 am
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -18,8 +17,9 @@
     <!-- Bootstrap 5 & Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+
     <link rel="stylesheet" href="css/style.css"/>
-    <link rel="stylesheet" href="css/doc-style.css"/>
+    <link rel="stylesheet" href="css/doc_details-style.css"/>
 </head>
 <body class="bg-light">
 <%
@@ -27,7 +27,6 @@
     String d_id = request.getParameter("d_id");
     String referer = request.getHeader("Referer");
     Display display = new Display();
-    Patient patient = null;
     Doctor doc = null;
     if(pid == null)
     {
@@ -36,7 +35,6 @@
     else {
         try
         {
-            patient = display.getPatientdetails(pid);
             doc = display.getDoctordetails(d_id);
         }
         catch (Exception e)
@@ -44,7 +42,6 @@
             System.out.println(e);
         }
     }
-
 %>
 <!-- Navbar -->
 <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm fixed-top">
@@ -66,7 +63,7 @@
                     <a class="nav-link active" href="patientHome.jsp">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" onclick="submitProfileForm()">Profile</a>
+                    <a class="nav-link" href="patientProfile.jsp">Profile</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#about">About</a>
@@ -76,7 +73,15 @@
                 </li>
             </ul>
             <div style="margin: 10px;" class="d-flex gap-2">
-                <%=pid%>
+                <%
+                    if(pid != null)
+                    {
+                %><%=pid%><%
+                }
+                else {
+                    response.sendRedirect(referer);
+                }
+            %>
             </div>
             <div class="d-flex gap-2">
                 <a href="signOut.jsp"><button class="btn btn-primary" >Sign out</button></a>
@@ -84,63 +89,83 @@
         </div>
     </div>
 </nav>
+<section style="background: linear-gradient(white,#ACB6E5,#91a4ff);margin-top: 5vh; padding: 5vh;">
 
-<section style="background: linear-gradient(#8dabff,#ACB6E5,rgb(246,247,248)); border-radius: 30px; justify-items: center; padding: 10vh;">
-    <!-- Make Appointment -->
-    <div class="col-md-4" style="min-width: 50vh;">
-        <div class="info-box" style="max-height: 100%;">
-            <h5>Make an Appointment</h5>
-            <form action="AppointmentChecker" method="post" class="mt-3">
-                <div class="row g-2 mb-2">
-                    <div class="row g-2 mb-2">
-                    <div class="col">
-                        <input type="text" class="form-control" name="reason" placeholder="Reason for Visit" required>
-                    </div>
-                    </div>
-                    <div class="row g-2 mb-2">
-                        <div class="col">
-                            <input type="text" name="dname" class="form-control" placeholder="Name" value="Dr. <%=doc.getFname()+" "+doc.getLname()%>" required readonly>
-                        </div>
-                    </div>
-                    <div class="row g-2 mb-2">
-                        <div class="col">
-                            <input type="text" name="pname" class="form-control" placeholder="Name" value="<%=patient.getFname()+" "+patient.getLname()%>" required readonly>
-                        </div>
-                    </div>
-                    <div class="row g-2 mb-2">
-                        <div class="col">
-                            <input type="date" name="date" class="form-control" required>
-                        </div>
-                        <div class="col">
-                            <select name="time" class="form-select" required>
-                                <option value="">Select Time Slot</option>
-                                <option>9:00 AM - 10:00 AM</option>
-                                <option>10:00 AM - 11:00 AM</option>
-                                <option>11:00 AM - 12:00 PM</option>
-                                <option>12:00 PM - 1:00 PM</option>
-                                <option>2:00 PM - 3:00 PM</option>
-                                <option>3:00 PM - 4:00 PM</option>
-                                <option>4:00 PM - 5:00 PM</option>
-                            </select>
-                        </div>
-                    </div>
+    <div class="profile-container">
+        <!-- Left Section -->
+        <div class="profile-left">
+            <img class="profile-image" src="ProfilePicChecker?user_id=<%=d_id%>" alt="Doctor Profile" />
+            <h4>Dr. <%=doc.getFname() + " " + doc.getLname()%></h4><%
+            if(doc.getVerified().equalsIgnoreCase("verified"))
+            {
+        %><div style="color: #198754;font-size: 14px; margin-top: 10px;">Verified Doctor</div><%
+        }
+        else {
+        %><div style="color: #871919;font-size: 14px; margin-top: 10px;">Not-Verified Doctor</div><%
+            }
+        %>
+            <p style="padding :2vh;">Experience compassionate, comprehensive healthcare designed around you. Connect with trusted professionals, manage your health records, and access care whenever you need it.</p>
+        </div>
 
-                    <div class="row g-2 mb-2">
-                        <div class="col">
-                            <input type="tel" name="phone" class="form-control" value="<%=patient.getPhone()%>" placeholder="Phone No" required pattern="[0-9]{10}" maxlength="10">
-                        </div>
-                    </div>
+        <!-- Right Section -->
+        <div class="profile-right">
+            <h5 class="mb-3">Bio & Professional Details</h5>
 
-                    <div class="text-center mt-3">
-                        <button type="submit" class="appointment-btn">Book Appointment</button>
-                    </div>
-                    <input type="hidden" name="pid" value="<%=pid%>">
-                    <input type="hidden" name="d_id" value="<%=d_id%>">
+            <div class="info-row">
+                <div class="info-label">Doctor ID</div>
+                <div class="info-value"><%=doc.getD_id()%></div>
+            </div>
+
+            <div class="info-row">
+                <div class="info-label">Qualification</div>
+                <div class="info-value"><%=doc.getQualification()%></div>
+            </div>
+
+            <div class="info-row">
+                <div class="info-label">Specialization</div>
+                <div class="info-value"><%=doc.getSpecialization()%></div>
+            </div>
+
+            <div class="info-row">
+                <div class="info-label">City</div>
+                <div class="info-value"><%=doc.getCity()%></div>
+            </div>
+
+            <div class="info-row">
+                <div class="info-label">Address</div>
+                <div class="info-value"><%=doc.getAddress()%></div>
+            </div>
+
+            <div class="info-row">
+                <div class="info-label">Status</div>
+                <div class="badge-section" style="margin-top: 0;">
+                    <% if(doc.getStatus() == 1) {
+                    %><div class="availability" >✅ Available for Appointment </div><%
+                }
+                else {
+                %><div class="not-availability" >❌ Not Available for Appointment </div><%
+                    }%>
                 </div>
-            </form>
+            </div>
+
+            <div class="info-row">
+                <div class="info-label">Verification</div>
+                <div class="info-value fw-semibold"><%=doc.getVerified()%></div>
+            </div>
+            <div class="d-flex justify-content-center gap-3 flex-wrap mt-3 mb-3">
+                <form action="appointment.jsp" method="post">
+                    <input type="hidden" name="d_id" value="<%=d_id%>">
+                    <button type="submit" class="appointment-btn">Book Appointment</button>
+                </form>
+
+                <button type="button" data-bs-toggle="modal" data-bs-target="#deleteModal" class="appointment-btn">
+                    See Appointment
+                </button>
+            </div>
         </div>
     </div>
 </section>
+
 <!-- Footer -->
 <footer id="about">
     <div class="container">
@@ -176,10 +201,5 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
 <script src="js/script.js"/>
-<script>
-    function submitProfileForm() {
-        document.getElementById('profileForm').submit();
-    }
-</script>
 </body>
 </html>

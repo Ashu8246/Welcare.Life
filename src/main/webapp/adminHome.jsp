@@ -20,7 +20,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css"/>
-  <link rel="stylesheet" href="css/patient-style.css"/>
+  <link rel="stylesheet" href="css/admin-style.css"/>
 </head>
 <body class="bg-light">
 
@@ -139,7 +139,7 @@
               <td>
                 <form id="statusForm" action="doctorDetails.jsp" method="post">
                   <input type="hidden" name="d_id" value="<%=d.getD_id()%>" readonly>
-                  <input type="hidden" name="admin_id" value="<%=admin_id%>">
+                  <input type="hidden" name="user_id" value="<%=admin_id%>">
                   <button type="submit" class="appointment-btn">See Details</button>
                 </form>
               </td>

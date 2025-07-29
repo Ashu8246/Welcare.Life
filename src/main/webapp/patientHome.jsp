@@ -103,18 +103,14 @@
 
   <div class="container py-5">
     <div class="row g-4">
-      <div class="info-box border-primary"  >
+      <div class="info-box border-primary" style="width: 45%; min-width: 10vh; margin: 2vh;" >
         <h5>Doctors</h5>
-        <div class="table-responsive mt-3" style="max-height: 40vh; overflow-y: auto;" >
+        <div class="table-responsive mt-3" style="max-height: 25vh; overflow-y: auto;" >
           <table class="table bg-transparent mb-0 no-vertical-borders">
             <thead class="table-light">
             <tr>
               <th>Dr.Name</th>
               <th>Specialization</th>
-              <th>Location</th>
-              <th>Contact</th>
-              <th>Availablity</th>
-              <th>Book Appointment</th>
             </tr>
             </thead>
             <tbody  >
@@ -131,26 +127,10 @@
                         <tr>
                           <td>Dr. <%=d.getFname()+" "+d.getLname()%></td>
                           <td><%=d.getSpecialization()%></td>
-                          <td><%=d.getCity()%></td>
-                          <td><%=d.getPhone()%></td>
-                          <td><%if(d.getStatus() == 0)
-                                {
-                                    %><h6 style="color: red">Not Available</h6><%
-                                }
-                                else
-                                {
-                                    %><h6 style="color: #20c997">Available</h6><%
-                                }
-                              %>
-                          </td>
                           <td>
-                            <form action="appointment.jsp" method="post">
-                              <input type="hidden" name="pid" value="<%=patient.getPid()%>">
+                            <form action="viewDoctor.jsp" method="post">
                               <input type="hidden" name="d_id" value="<%=d.getD_id()%>">
-                              <input type="hidden" name="pname" value="<%=patient.getFname()+" "+patient.getLname()%>">
-                              <input type="hidden" name="dname" value="<%=d.getFname()+" "+d.getLname()%>">
-                              <input type="hidden" name="phone" value="<%=patient.getPhone()%>">
-                              <button type="submit" class="appointment-btn">Book</button>
+                              <button type="submit" class="appointment-btn">See Details</button>
                             </form>
                           </td>
                         </tr><%
@@ -163,70 +143,48 @@
           </table>
         </div>
       </div>
-      <div class="container py-5">
-        <div class="row g-4">
-          <div class="info-box border-primary" >
-            <h5>Your Appointments</h5>
-            <div class="table-responsive mt-3" style="max-height: 40vh; overflow-y: auto;" >
-              <table class="table bg-transparent mb-0 no-vertical-borders" >
-                <thead class="table-light">
-                <tr>
-                  <th>Reason</th>
-                  <th>Patient Name</th>
-                  <th>Contact</th>
-                  <th>Date</th>
-                  <th>Time</th>
-                  <th>Status</th>
-                </tr>
-                </thead>
-                <tbody>
-                <%
-                  if(appoint != null)
+
+      <div class="info-box border-primary " style="width: 45%; min-width: 10vh; margin: 2vh;">
+        <h5>Your Appointments</h5>
+        <div class="table-responsive mt-3" style="max-height: 25vh; overflow-y: auto;" >
+          <table class="table bg-transparent mb-0 no-vertical-borders" >
+            <thead class="table-light">
+            <tr>
+              <th>Doctor Name</th>
+              <th>Date</th>
+              <th>See Details</th>
+            </tr>
+            </thead>
+            <tbody>
+            <%
+              if(appoint != null)
+              {
+                Iterator<Appointment> appointmentIterator = appoint.iterator();
+                while(appointmentIterator.hasNext())
+                {
+                  Appointment app = appointmentIterator.next();
+                  if(app != null)
                   {
-                    Iterator<Appointment> appointmentIterator = appoint.iterator();
-                    while(appointmentIterator.hasNext())
-                    {
-                      Appointment app = appointmentIterator.next();
-                      if(app != null)
-                      {
-                %>
-                <tr>
-                  <td><%=app.getReason()%></td>
-                  <td><%=app.getDname()%></td>
-                  <td><%=app.getPhone()%></td>
-                  <td><%=app.getDate()%></td>
-                  <td><%=app.getTime()%></td>
-                  <td><%=app.getStatus()%></td>
+            %>
+            <tr>
+              <td><%=app.getDname()%></td>
+              <td><%=app.getDate()%></td>
+              <td><form action="viewDoctor.jsp" method="post">
+                <input type="hidden" name="d_id" value="<%=app.getD_id()%>">
+                <button type="submit" class="appointment-btn">See Details</button>
+              </form></td>
 
-                </tr><%
-                      }
-                    }
+            </tr><%
                   }
-                %>
-                <!-- Add more rows as needed -->
-                </tbody>
-              </table>
-            </div>
-          </div>
+                }
+              }
+            %>
+            <!-- Add more rows as needed -->
+            </tbody>
+          </table>
         </div>
       </div>
-      <!-- Emergency Info -->
-      <div class="col-md-4" style="max-width: 200px; max-height: 150px;">
-        <div class="info-box">
-          <h5>Status </h5>
 
-          <p class="text-muted mt-3">
-<%--            To update Availability status use toggle button.--%>
-          </p>
-          <form action="UpdateToggleDoctorChecker" method="post">
-            <input type="hidden" name="d_id" value="">
-            <input type="hidden" name="type" value="availability">
-            <button class="emergency-btn" type="submit" style="margin-right: 20px;">
-              <i class="bi"></i>
-            </button >
-          </form>
-        </div>
-      </div>
     </div>
   </div>
 </section>

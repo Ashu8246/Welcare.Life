@@ -26,14 +26,19 @@ public class ProfilePicChecker extends HttpServlet
         Session session = DbProvider.getSession();
         try {
             ProfilePics pic = session.find(ProfilePics.class, userId);
-            session.refresh(pic);
             if (pic != null && pic.getProfilePic() != null) {
+                session.refresh(pic);
                 resp.setContentType("image/jpeg");
                 OutputStream out = resp.getOutputStream();
                 out.write(pic.getProfilePic());
                 out.flush();
             } else {
-                resp.sendError(HttpServletResponse.SC_NOT_FOUND, "Image not found");
+                ProfilePics pic1 = session.find(ProfilePics.class, "default");
+                session.refresh(pic1);
+                resp.setContentType("image/jpeg");
+                OutputStream out = resp.getOutputStream();
+                out.write(pic1.getProfilePic());
+                out.flush();
             }
         } catch (Exception e) {
             e.printStackTrace();
