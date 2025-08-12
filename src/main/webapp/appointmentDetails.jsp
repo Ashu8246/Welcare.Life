@@ -26,8 +26,13 @@
 </head>
 <body class="bg-light">
 <%
-//    String d_id = request.getParameter("d_id");
+//
     String d_id = (String) session.getAttribute("d_id");
+    String pid  = (String) session.getAttribute("pid");
+    if(d_id == null)
+    {
+        d_id = request.getParameter("d_id");
+    }
     String reason_id = request.getParameter("reason_id");
 
     Display display = new Display();
@@ -64,10 +69,28 @@
             <!-- Nav links -->
             <ul class="navbar-nav me-auto mb-2 mb-md-0 ms-md-4">
                 <li class="nav-item">
-                    <a class="nav-link active" href="docHome.jsp">Home</a>
+                    <%if(pid!=null) {
+                    %>
+                    <a class="nav-link" href="patientHome.jsp" ">Home</a>
+                    <%
+                    }
+                    else{
+                    %>
+                    <a class="nav-link" href="doctorHome.jsp" >Home</a>
+
+                    <%}%>
                 </li>
                 <li class="nav-item">
+                    <%if(pid!=null) {
+                %>
+                    <a class="nav-link" href="patientProfile.jsp" onclick="submitProfileForm()">Profile</a>
+                    <%
+                    }
+                    else{
+                    %>
                     <a class="nav-link" href="doctorProfile.jsp" onclick="submitProfileForm()">Profile</a>
+
+                    <%}%>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#about">About</a>
@@ -77,7 +100,14 @@
                 </li>
             </ul>
             <div style="margin: 10px;" class="d-flex gap-2">
-                <%=d_id%>
+                <%if(pid!=null) {
+                    %>
+                    <%=pid%>
+                    <%
+                }
+                else{
+                %><%=d_id%>
+                <%}%>
             </div>
             <div class="d-flex gap-2">
                 <a href="signOut.jsp"><button class="btn btn-primary" >Sign out</button></a>
@@ -106,9 +136,9 @@
                                 <option value="Not-Visited">Not-Visited</option>
                             </select>
                         </div>
-                        <div class="d-grid mt-4">
-                            <button type="submit" class="btn btn-primary fw-semibold">Update</button>
-                        </div>
+                            <div class="d-grid mt-4">
+                                <button type="submit" class="btn btn-primary fw-semibold">Update</button>
+                            </div>
                     </div>
                 </form>
             </div>
@@ -118,8 +148,6 @@
 </div>
 
 <section style="background: linear-gradient(#91a4ff,#ACB6E5,#f6f7f8);margin-top: 5vh; padding: 5vh;">
-
-
     <div class="appointment-container">
         <div class="header">
             <h4>Patient Appointment Details</h4>
@@ -178,9 +206,19 @@
             </div>
         </div>
         <!-- Update Status Button -->
+        <%
+            if(pid!=null)
+            {}
+            else
+            {
+        %>
         <div class="text-end mt-4">
             <button class="update-btn" data-bs-toggle="modal" data-bs-target="#appointStatusModal" >Update Status</button>
-        </div>
+        </div
+        <%
+            }
+        %>
+
     </div>
 </section>
 

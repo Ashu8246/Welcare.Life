@@ -21,6 +21,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css"/>
   <link rel="stylesheet" href="css/admin-style.css"/>
+
 </head>
 <body class="bg-light">
 
@@ -60,10 +61,10 @@
       <!-- Nav links -->
       <ul class="navbar-nav me-auto mb-2 mb-md-0 ms-md-4">
         <li class="nav-item">
-          <a class="nav-link active" href="index.jsp">Home</a>
+          <a class="nav-link active" href="#">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Profile</a>
+          <a class="nav-link" href="adminProfile.jsp">Profile</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#about">About</a>
@@ -148,64 +149,14 @@
                 }
               }
             %>
-            <!-- Add more rows as needed -->
             </tbody>
           </table>
         </div>
       </div>
-<%--      <div class="container py-5">--%>
-<%--        <div class="row g-4">--%>
-<%--          <div class="info-box border-primary" >--%>
-<%--            <h5>Your Appointments</h5>--%>
-<%--            <div class="table-responsive mt-3" style="max-height: 40vh; overflow-y: auto;" >--%>
-<%--              <table class="table bg-transparent mb-0 no-vertical-borders" >--%>
-<%--                <thead class="table-light">--%>
-<%--                <tr>--%>
-<%--                  <th>Reason</th>--%>
-<%--                  <th>Patient Name</th>--%>
-<%--                  <th>Contact</th>--%>
-<%--                  <th>Date</th>--%>
-<%--                  <th>Time</th>--%>
-<%--                  <th>Status</th>--%>
-<%--                </tr>--%>
-<%--                </thead>--%>
-<%--                <tbody>--%>
-<%--                <%--%>
-<%--                  if(appoint != null)--%>
-<%--                  {--%>
-<%--                    Iterator<Appointment> appointmentIterator = appoint.iterator();--%>
-<%--                    while(appointmentIterator.hasNext())--%>
-<%--                    {--%>
-<%--                      Appointment app = appointmentIterator.next();--%>
-<%--                      if(app != null)--%>
-<%--                      {--%>
-<%--                %>--%>
-<%--                <tr>--%>
-<%--                  <td><%=app.getReason()%></td>--%>
-<%--                  <td><%=app.getDname()%></td>--%>
-<%--                  <td><%=app.getPhone()%></td>--%>
-<%--                  <td><%=app.getDate()%></td>--%>
-<%--                  <td><%=app.getTime()%></td>--%>
-<%--                  <td><%=app.getStatus()%></td>--%>
-
-<%--                </tr><%--%>
-<%--                      }--%>
-<%--                    }--%>
-<%--                  }--%>
-<%--                %>--%>
-<%--                <!-- Add more rows as needed -->--%>
-<%--                </tbody>--%>
-<%--              </table>--%>
-<%--            </div>--%>
-<%--          </div>--%>
-<%--        </div>--%>
-<%--      </div>--%>
     </div>
   </div>
 </section>
 
-
-<!-- Subscribe Section -->
 <section id="contact" class="subscribe-section">
   <div class="contact-form">
     <h2>Contact Us</h2>
@@ -248,7 +199,6 @@
   </div>
 </section>
 
-<!-- Footer -->
 <footer id="about">
   <div class="container">
     <div class="row footer-section">

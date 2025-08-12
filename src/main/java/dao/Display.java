@@ -1,10 +1,8 @@
 package dao;
 
 import db.DbProvider;
-import entities.Appointment;
-import entities.Doctor;
-import entities.Patient;
-import entities.ProfilePics;
+import entities.*;
+import org.apache.coyote.Adapter;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
@@ -136,5 +134,19 @@ public class Display
             System.out.println(e.getMessage());
         }
         return appoint;
+    }
+
+    public Admin getAdminDetails(String admin_id)
+    {
+        Admin admin = null;
+        try {
+            admin = session.find(Admin.class, admin_id);
+            session.refresh(admin);
+            return admin;
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return admin;
     }
 }

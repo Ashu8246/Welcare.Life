@@ -29,6 +29,23 @@
     max-height: 6vh;
 }
 
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px dashed #e1e1e1;
+}
+
+.info-label {
+    font-weight: 500;
+    color: #444;
+}
+
+.info-value {
+    color: #666;
+    text-align: right;
+}
+
 .emergency-btn {
     background: linear-gradient(to right, #3498db, #1abc9c);
     border: none;

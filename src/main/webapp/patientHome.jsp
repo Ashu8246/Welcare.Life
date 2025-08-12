@@ -47,7 +47,6 @@
       System.out.println(e);
     }
 %>
-
 <!-- Navbar -->
 <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm fixed-top">
   <div class="container">
@@ -97,9 +96,7 @@
 </nav>
 
 <!-- Hero Section -->
-<section class="hero-section"></section>
-
-<section style="background: linear-gradient(white,#ACB6E5,#91a4ff);">
+<section style="background: linear-gradient(white,#ACB6E5,#91a4ff);padding-top: 5vh;">
 
   <div class="container py-5">
     <div class="row g-4">
@@ -111,6 +108,7 @@
             <tr>
               <th>Dr.Name</th>
               <th>Specialization</th>
+              <th>See Details</th>
             </tr>
             </thead>
             <tbody  >
@@ -124,21 +122,20 @@
                   if(d != null)
                   {
                     %>
-                        <tr>
-                          <td>Dr. <%=d.getFname()+" "+d.getLname()%></td>
-                          <td><%=d.getSpecialization()%></td>
-                          <td>
-                            <form action="viewDoctor.jsp" method="post">
-                              <input type="hidden" name="d_id" value="<%=d.getD_id()%>">
-                              <button type="submit" class="appointment-btn">See Details</button>
-                            </form>
-                          </td>
-                        </tr><%
+                    <tr>
+                      <td>Dr. <%=d.getFname()+" "+d.getLname()%></td>
+                      <td><%=d.getSpecialization()%></td>
+                      <td>
+                        <form action="viewDoctor.jsp" method="post">
+                          <input type="hidden" name="d_id" value="<%=d.getD_id()%>">
+                          <button type="submit" class="appointment-btn">See Details</button>
+                        </form>
+                      </td>
+                    </tr><%
                   }
                 }
               }
             %>
-            <!-- Add more rows as needed -->
             </tbody>
           </table>
         </div>
@@ -169,8 +166,9 @@
             <tr>
               <td><%=app.getDname()%></td>
               <td><%=app.getDate()%></td>
-              <td><form action="viewDoctor.jsp" method="post">
+              <td><form action="appointmentDetails.jsp" method="post">
                 <input type="hidden" name="d_id" value="<%=app.getD_id()%>">
+                <input type="hidden" name="reason_id" value="<%=app.getReason_id()%>">
                 <button type="submit" class="appointment-btn">See Details</button>
               </form></td>
 

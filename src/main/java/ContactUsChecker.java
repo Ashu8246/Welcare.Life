@@ -26,6 +26,7 @@ public class ContactUsChecker extends HttpServlet
         String message = req.getParameter("message");
         String role = req.getParameter("role");
         String referer = req.getHeader("referer");
+        System.out.println("referer:"+referer);
 
         if( reason != null && name != null && email != null && phone != null && message != null && role != null)
         {
