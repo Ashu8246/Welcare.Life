@@ -231,7 +231,10 @@
           </form>
 
           <!-- Delete Photo -->
-          <button type="button" class="btn btn-outline-danger" >Delete Photo</button>
+          <form action="DeleteProfilePhotoChecker" method="post" style="display:inline;">
+            <input type="hidden" name="user_id" value="<%= pid %>">
+            <input type="submit" onclick="location.reload()" value="Delete Photo" class="btn btn-outline-danger">
+          </form>
         </div>
       </div>
     </div>

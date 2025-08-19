@@ -221,7 +221,6 @@
 
     </div>
 </section>
-
 <!-- Footer -->
 <footer id="about">
     <div class="container">
