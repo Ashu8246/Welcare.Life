@@ -27,14 +27,15 @@ public class DeleteChecker extends HttpServlet
 
 
         DeleteDto deleteDto = new DeleteDto();
-        deleteDto.setAdmin_id(admin_id);
-        deleteDto.setPassword(password);
+
+        DeleteAuthenticator auth = new DeleteAuthenticator();
 
         if(admin_id != null && password != null && _for.equalsIgnoreCase("adminDeleteDoc"))
         {
+            deleteDto.setAdmin_id(admin_id);
+            deleteDto.setPassword(password);
             deleteDto.setD_id(d_id);
 
-            DeleteAuthenticator auth = new DeleteAuthenticator();
             boolean delete = auth.isDeleteDocByAdmin(deleteDto);
 
             if(delete)
@@ -52,7 +53,19 @@ public class DeleteChecker extends HttpServlet
         }
         else if(pid != null && password != null && _for.equalsIgnoreCase("patient"))
         {
+            deleteDto.setPid(pid);
+            deleteDto.setPassword(password);
 
+            boolean delete = auth.isDeletePatient(deleteDto);
+
+            if (delete)
+            {
+                resp.sendRedirect("index.jsp");
+            }
+            else
+            {
+                resp.sendRedirect(referer);
+            }
         }
         else
         {

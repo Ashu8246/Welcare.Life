@@ -7,6 +7,8 @@ import entities.Admin;
 import entities.Doctor;
 import entities.Patient;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 
 public class LoginAuthenticator
@@ -21,9 +23,10 @@ public class LoginAuthenticator
                 String password = patient.getPassword();
 
                 Session session = DbProvider.getSession();
-                Patient p = session.find(Patient.class, pid);
+                Query query = session.createQuery("select password from patients where p_id=:pid").setParameter("pid", pid);
+                String tablePassword = query.getSingleResult().toString();
 
-                if (password.equals(p.getPassword()))
+                if (password.equals(tablePassword))
                 {
                     return true;
                 }
@@ -45,8 +48,10 @@ public class LoginAuthenticator
                 String password = admin.getPassword();
 
                 Session session = DbProvider.getSession();
-                Admin a = session.find(Admin.class, admin_id);
-                if (password.equals(a.getPassword()))
+                Query query = session.createQuery("select password from admins where admin_id=:admin_id").setParameter("admin_id", admin_id);
+                String tablePassword = query.getSingleResult().toString();
+
+                if (password.equals(tablePassword))
                 {
                     return true;
                 }
@@ -65,11 +70,14 @@ public class LoginAuthenticator
         {
             try
             {
+                String doctor_id = doctor.getD_id();
                 String password = doctor.getPassword();
-                Session session = DbProvider.getSession();
 
-                Doctor doctor1 = session.find(Doctor.class, doctor.getD_id());
-                if(password.equals(doctor1.getPassword()))
+                Session session = DbProvider.getSession();
+                Query query = session.createQuery("select password from doctors where d_id=:did").setParameter("d_id", doctor_id);
+                String tablePassword = query.getSingleResult().toString();
+
+                if(password.equals(tablePassword))
                 {
                     return true;
                 }
